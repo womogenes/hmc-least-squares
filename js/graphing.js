@@ -11,10 +11,10 @@ const graphData = (data) => {
   // Insert data
   calculator.setExpression({
     type: 'table',
-    id: 'table1',
+    id: 'data_table',
     columns: [
       { latex: 'x_1', values: x },
-      { latex: 'y_1', values: y },
+      { latex: 'y_1', color: Desmos.Colors.GREEN, values: y },
     ],
   });
 
@@ -40,13 +40,12 @@ const graphData = (data) => {
     ymax: ymax + 0.2 * yrange,
   };
 
-  console.log(viewport);
-
   const state = calculator.getState();
   Object.assign(state.graph, {
     viewport,
   });
   calculator.setState(state);
+  calculator.setDefaultState(state);
 };
 
 const polyToString = (coefs) => {
@@ -55,6 +54,8 @@ const polyToString = (coefs) => {
     if (coefs[i] === 0) continue;
     if (i === 0) {
       str += coefs[i];
+    } else if (i === 1) {
+      str += coefs[i] + 'x';
     } else {
       str += coefs[i] + `x^{${i}}`;
     }

@@ -26,6 +26,12 @@ dataInputEl.on('change', async (e) => {
     data.push(point);
   }
 
+  // Reserve a spot for best fit polynomial
+  /* calculator.setExpression({
+    id: 'best_fit_poly',
+    latex: ' ',
+  }); */
+
   // Graph the input
   graphData(data);
 });
@@ -43,7 +49,9 @@ formEl.on('submit', (e) => {
   // Do some stuff
   const coefs = polyfit(data, degree);
   calculator.setExpression({
-    id: 'best-fit-poly',
+    id: 'best_fit_poly',
     latex: polyToString(coefs),
+    color: Desmos.Colors.BLUE,
+    lineWidth: 5,
   });
 });
