@@ -22,7 +22,6 @@ const polyfit = (data, deg) => {
       mat.subset(math.index(row, col), power[row + col]);
     }
   }
-  console.log(mat.toString());
 
   // Now find the vector on the right
   const vec = math.zeros(deg + 1);
@@ -35,6 +34,7 @@ const polyfit = (data, deg) => {
   }
 
   // Now these are the coefficients
-  const coefs = math.multiply(math.inv(mat), vec);
+  let coefs = math.multiply(math.inv(mat), vec);
+  //coefs = math.round(coefs, 15);
   return coefs.toArray();
 };
