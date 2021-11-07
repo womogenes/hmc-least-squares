@@ -52,12 +52,23 @@ const polyToString = (coefs) => {
   let str = '';
   for (let i = coefs.length - 1; i >= 0; i--) {
     if (coefs[i] === 0) continue;
+
+    // Scientific notation
+    let coefStr = coefs[i].toString();
+    if (coefStr.includes('e')) {
+      let eIndex = coefStr.indexOf('e');
+      let exponent = coefStr.substr(eIndex + 1);
+      let mantissa = coefStr.substr(0, eIndex - 1);
+      coefStr = `${mantissa}\\cdot10^{${exponent}}\\cdot`;
+    }
+
+    str += coefStr;
+
     if (i === 0) {
-      str += coefs[i];
     } else if (i === 1) {
-      str += coefs[i] + 'x';
+      str += 'x';
     } else {
-      str += coefs[i] + `x^{${i}}`;
+      str += `x^{${i}}`;
     }
     str += '+';
   }

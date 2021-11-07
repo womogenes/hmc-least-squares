@@ -47,11 +47,17 @@ formEl.on('submit', (e) => {
   degree = parseInt(degreeInputEl.val());
 
   // Do some stuff
-  const coefs = polyfit(data, degree);
+  let coefs = polyfit(data, degree);
   calculator.setExpression({
     id: 'best_fit_poly',
     latex: polyToString(coefs),
     color: Desmos.Colors.BLUE,
     lineWidth: 5,
   });
+
+  // Text stuff
+  coefs = math.round(coefs, 3);
+  console.log(coefs, polyToString(coefs));
+  katex.render(polyToString(coefs), document.querySelector('#best-fit-poly'));
+  $('#results').fadeIn();
 });
