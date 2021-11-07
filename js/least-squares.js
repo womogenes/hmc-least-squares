@@ -38,3 +38,23 @@ const polyfit = (data, deg) => {
   //coefs = math.round(coefs, 15);
   return coefs.toArray();
 };
+
+const evaluate = (poly, x) => {
+  // Evaluate a polynomial at given input
+  let s = 0;
+  for (let i = 0; i < poly.length; i++) {
+    s += poly[i] * Math.pow(x, i);
+  }
+  return s;
+};
+
+const error = (data, poly) => {
+  // Calculate average squared error between polynomial and data
+  if (data.length === 0) return 0;
+
+  let totalError = 0;
+  for (let point of data) {
+    totalError += Math.pow(evaluate(poly, point[0]) - point[1], 2);
+  }
+  return totalError / data.length;
+};
