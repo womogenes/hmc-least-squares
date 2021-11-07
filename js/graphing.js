@@ -59,7 +59,7 @@ const polyToString = (coefs) => {
       let eIndex = coefStr.indexOf('e');
       let exponent = coefStr.substr(eIndex + 1);
       let mantissa = coefStr.substr(0, eIndex - 1);
-      coefStr = `${mantissa}\\cdot10^{${exponent}}\\cdot`;
+      coefStr = `${mantissa}\\cdot10^{${exponent}}\\cdot `;
     }
 
     str += coefStr;
