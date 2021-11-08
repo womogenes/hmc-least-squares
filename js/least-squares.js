@@ -39,6 +39,31 @@ const polyfit = (data, deg) => {
   return coefs.toArray();
 };
 
+const r_sqared = (data) => {
+  // Calculate Pearson correlation coefficient for given data
+  // https://en.wikipedia.org/wiki/Pearson_correlation_coefficient
+  if (data.length === 0) return 0;
+
+  let x_mean = math.mean(data.map((point) => point[0])) / data.length;
+  let y_mean = math.mean(data.map((point) => point[1])) / data.length;
+
+  let num = 0;
+  for (let point of points) {
+    num += (point[0] - x_mean) * (point[1] - y_mean);
+  }
+
+  let denom_term1 = 0;
+  for (let point of points) {
+    denom_term1 += Math.pow(point[0] - x_mean, 2);
+  }
+  let denom_term2 = 0;
+  for (let point of points) {
+    denom_term2 += Math.pow(point[1] - y_mean);
+  }
+
+  return num / (denom_term1 * denom_term2);
+};
+
 const evaluate = (poly, x) => {
   // Evaluate a polynomial at given input
   let s = 0;
