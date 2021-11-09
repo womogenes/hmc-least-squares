@@ -1,6 +1,7 @@
 const elt = document.getElementById('calculator');
 const calculator = Desmos.GraphingCalculator(elt, {
   keypad: false,
+  expressions: false,
 });
 
 const graphData = (data) => {

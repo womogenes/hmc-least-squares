@@ -59,7 +59,6 @@ formEl.on('submit', (e) => {
   // Text stuff
   coefs = math.round(coefs, 3);
   katex.render(polyToString(coefs), document.querySelector('#best-fit-poly'));
-  $('#avg-error').text(polyError);
-  $('#r2-value').text(r_squared(data));
-  $('#results').fadeIn();
+  katex.render(polyError.toString(), document.querySelector('#avg-error'));
+  katex.render(r_squared(data).toString(), document.querySelector('#r2-value'));
 });

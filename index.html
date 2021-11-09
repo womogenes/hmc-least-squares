@@ -77,53 +77,85 @@
   <body>
     <main>
       <div class="mb-5" id="content">
-        <h1>Least Squares Regression</h1>
+        <h1 class="text-center display-3"><em>Least Squares Regression</em></h1>
 
-        <form class="needs-validation mb-3" id="input-form" novalidate>
-          <label for="data-upload" class="form-label"> Data points </label>
-          <input
-            class="form-control mb-3"
-            type="file"
-            id="data-upload"
-            required
-          />
+        <div class="card p-4 mb-3" id="about">
+          <h3>About</h3>
+          <p class="mb-2">
+            This tool computes the best-fit polynomial for a dataset with single
+            feature input and output using least squares regression.
+          </p>
+          <p class="mb-0">
+            <a href="https://github.com/womogenes/hmc-least-squares">
+              Source code
+            </a>
+          </p>
+        </div>
 
-          <label for="degree-input" class="form-label">
-            Degree of polynomial
-          </label>
-          <input
-            class="form-control mb-3"
-            type="number"
-            min="1"
-            id="degree-input"
-            oninput="validity.valid||(value='');"
-            required
-          />
+        <div class="card p-4 mb-3" id="input">
+          <h3>Input</h3>
+          <form class="needs-validation" id="input-form" novalidate>
+            <label for="data-upload" class="form-label">
+              Data points<br />
+              <small>
+                Input files should have one point on each lines (separated by
+                <code>\n</code> characters), with each point's components
+                separated by tab (<code>\t</code>) characters.
+              </small>
+            </label>
+            <input
+              class="form-control mb-3"
+              type="file"
+              id="data-upload"
+              required
+            />
 
-          <button class="btn btn-primary" type="submit" id="data-upload-btn">
-            Fit to data
-          </button>
-        </form>
+            <label for="degree-input" class="form-label">
+              Degree of polynomial
+            </label>
+            <input
+              class="form-control mb-3"
+              type="number"
+              min="1"
+              id="degree-input"
+              oninput="validity.valid||(value='');"
+              required
+            />
 
-        <table class="table table-bordered mb-3" id="results">
-          <thead></thead>
-          <tbody>
-            <tr>
-              <td>Best fit polynomial</td>
-              <td><span id="best-fit-poly"></span></td>
-            </tr>
-            <tr>
-              <td>Average squared error</td>
-              <td><span id="avg-error"></span></td>
-            </tr>
-            <tr>
-              <td>R<sup>2</sup> value</td>
-              <td><span id="r2-value"></span></td>
-            </tr>
-          </tbody>
-        </table>
+            <button class="btn btn-primary" type="submit" id="data-upload-btn">
+              Fit to data
+            </button>
+          </form>
+        </div>
 
-        <div id="calculator"></div>
+        <div class="card p-4 mb-3" id="results">
+          <h3>Results</h3>
+          <table class="table table-bordered mb-3" id="results">
+            <!-- Some table spacing stuff -->
+            <colgroup>
+              <col span="1" style="width: 20%" />
+              <col span="1" />
+            </colgroup>
+
+            <thead></thead>
+            <tbody>
+              <tr>
+                <td>Best fit polynomial</td>
+                <td><span id="best-fit-poly"></span></td>
+              </tr>
+              <tr>
+                <td>Average squared error</td>
+                <td><span id="avg-error"></span></td>
+              </tr>
+              <tr>
+                <td>R<sup>2</sup> value</td>
+                <td><span id="r2-value"></span></td>
+              </tr>
+            </tbody>
+          </table>
+
+          <div id="calculator"></div>
+        </div>
       </div>
     </main>
   </body>

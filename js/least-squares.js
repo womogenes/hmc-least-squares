@@ -61,8 +61,6 @@ const r_squared = (data) => {
     denom_term2 += Math.pow(point[1] - y_mean, 2);
   }
 
-  console.log(num, denom_term1, denom_term2);
-
   return num / Math.sqrt(denom_term1 * denom_term2);
 };
 
