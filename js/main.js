@@ -60,5 +60,8 @@ formEl.on('submit', (e) => {
   coefs = math.round(coefs, 3);
   katex.render(polyToString(coefs), document.querySelector('#best-fit-poly'));
   katex.render(polyError.toString(), document.querySelector('#avg-error'));
-  katex.render(r_squared(data).toString(), document.querySelector('#r2-value'));
+
+  const { pearson_r, r_squared } = r_values(data, coefs);
+  katex.render(pearson_r.toString(), document.querySelector('#pearson-r'));
+  katex.render(r_squared.toString(), document.querySelector('#r2-value'));
 });
