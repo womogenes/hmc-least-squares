@@ -46,6 +46,9 @@ formEl.on('submit', (e) => {
   // Get the degree
   degree = parseInt(degreeInputEl.val());
 
+  // Make sure there are more data points than degree
+  if (!(data.length > degree)) return;
+
   // Do some stuff
   let coefs = polyfit(data, degree);
   calculator.setExpression({
@@ -54,14 +57,12 @@ formEl.on('submit', (e) => {
     color: Desmos.Colors.BLUE,
     lineWidth: 5,
   });
-  let polyError = error(data, coefs);
 
   // Text stuff
   coefs = math.round(coefs, 3);
   katex.render(polyToString(coefs), document.querySelector('#best-fit-poly'));
-  katex.render(polyError.toString(), document.querySelector('#avg-error'));
 
   const { pearson_r, r_squared } = r_values(data, coefs);
-  katex.render(pearson_r.toString(), document.querySelector('#pearson-r'));
+  katex.render(degree === 1 ? pearson_r.toString() : 'N/A', document.querySelector('#pearson-r'));
   katex.render(r_squared.toString(), document.querySelector('#r2-value'));
 });
