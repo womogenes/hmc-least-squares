@@ -39,9 +39,11 @@ const polyfit = (data, deg) => {
   return coefs.toArray();
 };
 
-const r_squared = (data) => {
+const r_values = (data, poly) => {
   // Calculate Pearson correlation coefficient for given data
   // https://en.wikipedia.org/wiki/Pearson_correlation_coefficient
+  // Also calculates general r^2 value
+
   if (data.length === 0) return 0;
 
   let x_mean = math.mean(data.map((point) => point[0])) / data.length;
@@ -52,16 +54,20 @@ const r_squared = (data) => {
     num += (point[0] - x_mean) * (point[1] - y_mean);
   }
 
-  let denom_term1 = 0;
+  let x_std = 0;
   for (let point of data) {
-    denom_term1 += Math.pow(point[0] - x_mean, 2);
+    x_std += Math.pow(point[0] - x_mean, 2);
   }
-  let denom_term2 = 0;
+  let y_std = 0;
   for (let point of data) {
-    denom_term2 += Math.pow(point[1] - y_mean, 2);
+    y_std += Math.pow(point[1] - y_mean, 2);
   }
 
-  return num / Math.sqrt(denom_term1 * denom_term2);
+  let pearson_r = (y_std === 0 || x_std === 0) ? 0 : num / Math.sqrt(x_std * y_std);
+
+  let r_squared = y_std === 0 ? 0 : 1 - error(data, poly) / y_std;
+
+  return { pearson_r, r_squared };
 };
 
 const evaluate = (poly, x) => {
