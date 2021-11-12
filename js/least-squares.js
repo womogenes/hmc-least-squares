@@ -46,8 +46,8 @@ const r_values = (data, poly) => {
 
   if (data.length === 0) return 0;
 
-  let x_mean = math.mean(data.map((point) => point[0])) / data.length;
-  let y_mean = math.mean(data.map((point) => point[1])) / data.length;
+  let x_mean = math.mean(data.map((point) => point[0]));
+  let y_mean = math.mean(data.map((point) => point[1]));
 
   let num = 0;
   for (let point of data) {
@@ -63,7 +63,8 @@ const r_values = (data, poly) => {
     y_std += Math.pow(point[1] - y_mean, 2);
   }
 
-  let pearson_r = (y_std === 0 || x_std === 0) ? 0 : num / Math.sqrt(x_std * y_std);
+  let pearson_r =
+    y_std === 0 || x_std === 0 ? 0 : num / Math.sqrt(x_std * y_std);
 
   let r_squared = y_std === 0 ? 0 : 1 - error(data, poly) / y_std;
 
@@ -87,5 +88,5 @@ const error = (data, poly) => {
   for (let point of data) {
     totalError += Math.pow(evaluate(poly, point[0]) - point[1], 2);
   }
-  return totalError / data.length;
+  return totalError;
 };
