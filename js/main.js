@@ -47,7 +47,11 @@ formEl.on('submit', (e) => {
   degree = parseInt(degreeInputEl.val());
 
   // Make sure there are more data points than degree
-  if (!(data.length > degree)) return;
+  if (!(data.length > degree)) {
+    alert(
+      'The number of data points must be more than the degree of the polynomial.'
+    );
+  }
 
   // Do some stuff
   let coefs = polyfit(data, degree);
@@ -63,6 +67,9 @@ formEl.on('submit', (e) => {
   katex.render(polyToString(coefs), document.querySelector('#best-fit-poly'));
 
   const { pearson_r, r_squared } = r_values(data, coefs);
-  katex.render(degree === 1 ? pearson_r.toString() : 'N/A', document.querySelector('#pearson-r'));
+  katex.render(
+    degree === 1 ? pearson_r.toString() : 'N/A',
+    document.querySelector('#pearson-r')
+  );
   katex.render(r_squared.toString(), document.querySelector('#r2-value'));
 });
